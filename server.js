@@ -45,4 +45,20 @@ app.post("/photos", async (req, res) => {
   }
 })
 
+app.delete("/photos/:id", async (req, res) => {
+  try {
+    res.json(await Photos.findByIdAndDelete(req.params.id))
+  } catch(error) {
+    res.status(400).json(error)
+  }
+})
+
+app.put("/photos/:id", async (req, res) => {
+  try {
+    res.json(await Photos.findByIdAndUpdate(req.params.id, req.body, { new : true }))
+  } catch(error) {
+    res.status(400).json(error)
+  }
+})
+
 app.listen(PORT, () => console.log(`${PORT}`))
